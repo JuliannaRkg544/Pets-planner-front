@@ -6,9 +6,18 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;
   min-height: 100%;
- 
- 
+  background-color: var(--maincolor);
+  height: 100vh;
 }
 .root{
   min-height: 100%;
+ 
+
+}
+
+:root{
+  --maincolor: #fff2a6;
+  --darkcolor: #FFDE51;
+  --ligthgrey: #f5f5f5;
+  --fontgrey: #696969;
 }

@@ -1,6 +1,6 @@
 import logo from "../assets/imgs/pets-planner.png";
 import Container from "../styledComponents/Container";
-
+import { Rigth } from "../styledComponents/Container";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useContex, useState } from "react";
@@ -46,7 +46,7 @@ export default function Login() {
       <div className="left">
         <img src={logo} />
       </div>
-      <div className="right">
+      <Rigth>
         <input
           type="email"
           placeholder="Email"
@@ -63,7 +63,7 @@ export default function Login() {
         <Link to={"/logup"}>
           <span>Não tem conta? Cadastre-se</span>
         </Link>
-      </div>
+      </Rigth>
     </Container>
   );
 }
