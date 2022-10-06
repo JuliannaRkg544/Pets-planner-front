@@ -54,18 +54,18 @@ const Style = styled.div`
   display: flex;
   /* margin-top: 100px; */
   flex-direction: column;
-  padding: 20%;
+  padding: 15% 20%;
   align-items: center;
   justify-content: center;
   height: 100vh;
   margin-top: 30px;
-  background-color: blueviolet;
+  
   h1{
     font-family: 'Atma', cursive;
     font-size: 28px;
   }
   .pet-info{
-    background-color: blue;
+    
     display: flex;
     justify-content: start;
     align-items: flex-start;

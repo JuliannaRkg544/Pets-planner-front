@@ -7,10 +7,13 @@ import UserContext from "../Context/UserContext";
 export default function Task({ toggleModal, setToggleModal }) {
   const [petTask, setPetTask] = useState("");
   const {user, setUSer} = useContext(UserContext)
-  const {token} = user
+  // const {token} = user
+
+  const token =localStorage.getItem("token")
 
   function sendTask() {
-    const body = { petTask };
+    const body = { 
+      description: petTask };
     const URL = "http://localhost:4000/pet/task/add";
     const config = {
       headers: {
@@ -31,14 +34,12 @@ export default function Task({ toggleModal, setToggleModal }) {
     setToggleModal(false)
    }
   
-  
+   
   return (
     <Modal
       isOpen={toggleModal}
       onRequestClose={isModalOpen}
       style={customStyles}
-      // onAfterOpen={afterOpenModal}
-      contentLabel="Example Modal"
     >
       <ModalStyle>
         <input
@@ -68,10 +69,18 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    backgroundColor: "#333",
+    backgroundColor: "#fff",
     borderRadius: "50px",
     minWidth: "300px",
     minHeight: "162px",
+  },
+  overlay: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(255, 255, 255, 0.30)'
   },
 };
 
@@ -87,6 +96,12 @@ const ModalStyle = styled.div`
     font-weight: 700;
     color: #fff;
     text-align: center;
+  }
+  input{
+    width: 100%;
+    padding: 2px;
+    color: #2e2e2e;
+   
   }
   .buttons {
     width: 100%;
@@ -116,12 +131,12 @@ const ModalStyle = styled.div`
     cursor: pointer;
   }
   #accept {
-    background-color: var(--darkcolor);
+    background-color: #eead2d;
     color: #fff;
   }
   #decline {
     background-color: #fff;
-    color: var(--darkcolor);
+    color: #eead2d;
   }
   @media screen and (max-width: 431px) {
     p {

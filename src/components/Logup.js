@@ -1,4 +1,4 @@
-import logo from "../assets/imgs/pets-planner.png";
+import logo from "../assets/imgs/pets-planner.svg";
 import Container from "../styledComponents/Container";
 
 import axios from "axios";

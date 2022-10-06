@@ -1,4 +1,4 @@
-import logo from "../assets/imgs/pets-planner.png";
+import logo from "../assets/imgs/pets-planner.svg";
 import Container from "../styledComponents/Container";
 import { Rigth } from "../styledComponents/Container";
 import axios from "axios";
@@ -13,14 +13,7 @@ export default function Login() {
 
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  // const [disabled, setDisabled] = useState(false) //disabilita oq?
-
-  //BONUS DO LOCALSTORAGE
-  // let foto = localStorage.getItem("foto")
-  // let token =localStorage.getItem("token")
-  // if (foto!=undefined || token!=undefined){
-  //   navigate("/today")
-  // }
+ 
 
   const URL_POST = "http://localhost:4000/login";
   const body = {
@@ -37,6 +30,7 @@ export default function Login() {
         const { data } = response;
         console.log(data)
         setUser(data)
+        localStorage.setItem("token", data.token)
 
         navigate("/")
       })

@@ -37,7 +37,7 @@ export default function Main() {
             </Link>
           );
         })}
-        <Link to={"/signup-pet"}>
+        <Link className="main" to={"/signup-pet"}>
           {" "}
           <button>New Baby</button>
         </Link>
@@ -54,9 +54,8 @@ export default function Main() {
 
 const Style = styled.div`
   display: flex;
-  /* margin-top: 100px; */
   flex-direction: column;
-  padding: 100px;
+  padding: 15% 20% ;
   align-items: center;
   justify-content: center;
   button {
@@ -75,6 +74,13 @@ const Style = styled.div`
   button:hover {
     cursor: pointer;
     filter: brightness(1.2);
+  }
+  a{
+    text-decoration: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
 

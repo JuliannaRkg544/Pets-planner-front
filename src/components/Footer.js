@@ -51,4 +51,8 @@ const Bottom = styled.div`
     align-items: center;
     margin-bottom: 30px;
   }
+  a{
+    text-decoration: none;
+    color: #000;
+  }
 `;

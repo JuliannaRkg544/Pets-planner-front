@@ -2,24 +2,26 @@ import styled from "styled-components";
 
 export default function ToDoListStyle({ children }) {
   return <Style>{children}</Style>;
-}
+} 
 
 const Style = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20%;
-
+  padding: 15% 20% ;
+  h1{
+   
+  }
   p {
     display: flex;
     justify-content: start;
     padding: 5px;
     align-items: center;
-    width: 303px;
+    width: 100%;
     height: 45px;
     margin: 20px 0;
-    color: #696969;
+    color: #000;
     background-color: #fff;
     font-size: 18px;
     border: 1px solid #aaa;
