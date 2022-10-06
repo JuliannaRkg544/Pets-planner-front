@@ -7,11 +7,15 @@ export default function Input({ children }) {
 
 const Style = styled.div`
   display: flex;
-  flex-direction: column;
   padding: 80px;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   margin-top: 40px;
+  form{
+    display: flex;
+    flex-direction: column;
+  }
     p{
      color: var(--fontgrey);
     }
@@ -27,3 +31,5 @@ const Style = styled.div`
   }
   
 `;
+
+

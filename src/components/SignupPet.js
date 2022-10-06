@@ -3,9 +3,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
 import Input from "../styledComponents/Inputs";
+import Button from "../styledComponents/SubmmitButton";
+import Footer from "./Footer";
 import Header from "./Header";
 
-export default function SignupDog() {
+export default function SignupPet() {
   const [name, setName] = useState("");
   const [birthdate, setBirthdate] = useState("");
   const [genre, setGenre] = useState("");
@@ -13,12 +15,13 @@ export default function SignupDog() {
 
   const navigate = useNavigate();
 
-  const URL = "http://localhost:4000/new-baby";
+  const URL = "http://localhost:4000/pet/new";
   const body = {
     name,
     birthdate,
     genre,
     breed,
+    
   };
 
   function submmit(event) {
@@ -32,7 +35,7 @@ export default function SignupDog() {
       })
       .catch((error) => {
         console.log(error.response);
-        alert(error.response.data[0].message)
+        alert(error.response.data[0].message);
       });
   }
 
@@ -40,6 +43,7 @@ export default function SignupDog() {
     <>
       <Header />
       <Input>
+      <form action="http://localhost:4000/pet/new" encType="multipart/form-data" method="post" >
         <p>New baby</p>
         <input
           type="text"
@@ -65,27 +69,19 @@ export default function SignupDog() {
           value={breed}
           onChange={(e) => setBreed(e.target.value)}
         ></input>
-        <Button onClick={submmit}>Cadastrar</Button>
+       
+          <input
+            type="file"
+            class="form-control-file"
+            name="uploaded_file"
+          ></input>
+      <input  type="submit" value="Submit" ></input>
+     </form>
+        <Button onClick={()=>submmit}>Cadastrar</Button>
       </Input>
+      <Footer/>
     </>
   );
 }
 
-const Button = styled.div`
-  width: 220px;
-  height: 60px;
-  background-color: var(--darkcolor);
-  border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 3px;
 
-  :hover {
-    cursor: pointer;
-    border: solid 2px #555;
-    color: #333;
-    filter: brightness(1.2);
-    transition: all(1.2);
-  }
-`;

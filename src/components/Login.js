@@ -3,9 +3,12 @@ import Container from "../styledComponents/Container";
 import { Rigth } from "../styledComponents/Container";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { useContex, useState } from "react";
+import { useContext, useState } from "react";
+
+import UserContext from "../Context/UserContext"
 
 export default function Login() {
+  const { user, setUser } = useContext(UserContext)
   const navigate = useNavigate();
 
   const [password, setPassword] = useState("");
@@ -32,6 +35,8 @@ export default function Login() {
       .post(URL_POST, body)
       .then((response) => {
         const { data } = response;
+        console.log(data)
+        setUser(data)
 
         navigate("/")
       })
