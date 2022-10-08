@@ -13,10 +13,19 @@ const Style = styled.div`
   h1{
    
   }
-  p {
+  .underline{
+    text-decoration: line-through;
+    color: var(--fontgrey);
+    
+  }
+ 
+  span, p{
+    cursor: pointer;
+  }
+  .single-task {
     display: flex;
-    justify-content: start;
-    padding: 5px;
+    justify-content: space-between;
+    padding: 5px 10px;
     align-items: center;
     width: 100%;
     height: 45px;

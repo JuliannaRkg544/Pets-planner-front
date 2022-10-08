@@ -19,6 +19,16 @@ const Style = styled.div`
     p{
      color: var(--fontgrey);
     }
+    .radio-input{
+      width: 1.25em;
+      height: 1.25em;
+      margin-right: 10px;
+
+    }
+    label{
+      display: inline-flex;
+      align-items: center;
+    }
     input {
     width: 303px;
     height: 45px;
