@@ -16,6 +16,7 @@ const Top = styled.div`
   position: fixed;
   background-color: #fff;
   top: 0;
+  z-index: 2;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
   display: flex;
   padding: 30px;

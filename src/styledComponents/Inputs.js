@@ -7,13 +7,27 @@ export default function Input({ children }) {
 
 const Style = styled.div`
   display: flex;
-  flex-direction: column;
   padding: 80px;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   margin-top: 40px;
+  form{
+    display: flex;
+    flex-direction: column;
+  }
     p{
      color: var(--fontgrey);
+    }
+    .radio-input{
+      width: 1.25em;
+      height: 1.25em;
+      margin-right: 10px;
+
+    }
+    label{
+      display: inline-flex;
+      align-items: center;
     }
     input {
     width: 303px;
@@ -27,3 +41,5 @@ const Style = styled.div`
   }
   
 `;
+
+

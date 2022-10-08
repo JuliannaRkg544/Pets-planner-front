@@ -1,12 +1,22 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export default function Footer() {
   return (
     <Bottom>
       <div className="box">
-        <span>List</span>
-        <div className="main">Pets</div>
-        <span>Health</span>
+        <Link to={"/to-do-list"}>
+          {" "}
+          <span>List</span>{" "}
+        </Link>
+        <Link to={"/"}>
+          {" "}
+          <div className="main">Pets</div>{" "}
+        </Link>
+        <Link to={"/health-card"}>
+          {" "}
+          <span>Health</span>{" "}
+        </Link>
       </div>
     </Bottom>
   );
@@ -40,5 +50,9 @@ const Bottom = styled.div`
     justify-content: center;
     align-items: center;
     margin-bottom: 30px;
+  }
+  a{
+    text-decoration: none;
+    color: #000;
   }
 `;
