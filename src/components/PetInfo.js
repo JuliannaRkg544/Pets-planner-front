@@ -6,14 +6,22 @@ import Footer from "./Footer";
 import Header from "./Header";
 import ModalDate from "./ModalDate";
 import logoDog from "../assets/imgs/dog-logo.png";
-import logoCat from "../assets/imgs/cat-logo.png"
+import logoCat from "../assets/imgs/cat-logo.png";
 
 export default function PetInfo() {
   const [petInfo, setPetInfo] = useState([]);
   const [date, setDate] = useState("");
   const [modal, setModal] = useState(false);
+  const token = localStorage.getItem("token");
+  const [vaccine, setVaccine] = useState("");
+  const [disabledRadio, setDisabledRadio] = useState(false);
+  let petHealth = []
+
   const { idPet } = useParams();
-  const URL = `http://localhost:4000/pet/get/${idPet}`;
+  const { idNature } = useParams();
+  const URL = `http://localhost:4000/pet/get/${idNature}/${idPet}`;
+  const URL_DATE = `http://localhost:4000/pet/health-${idNature}/patch/${vaccine}/${idPet}`;
+
 
   useEffect(() => {
     axios
@@ -21,15 +29,27 @@ export default function PetInfo() {
       .then((response) => {
         const { data } = response;
         setPetInfo([data]);
+        // setPetHealth([data[0].Dog])
         console.log("get pet ", data);
       })
       .catch((error) => {
-        console.log(error.response); 
+        console.log(error.response);
       });
-  }, []);
+  }, [disabledRadio]);
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+ 
 
   if (petInfo.length > 0) {
-    const pet = petInfo[0];
+    const petArr = petInfo[0];
+    const pet = petArr[0];
+    if( idNature==="dog") { petHealth = petInfo[0][0].Dog[0] } else {  petHealth = petInfo[0][0].Cat[0]}
+   
+  
 
     return pet.isDog ? (
       <>
@@ -51,76 +71,101 @@ export default function PetInfo() {
                 Vacinas:
                 <div className="health">
                   <p>V8/V10</p>
-                  <p>Data: {date} </p>
-                  <label for="pet">
-                    <input
-                      onClick={() => setModal(!modal)}
-                      type="radio"
-                      id="pet"
-                      className="radio-input"
-                    ></input>
-                    
-                  </label>
+                  <p>Data: {petHealth.V8_V10_date} </p>
+                  <button
+                    onClick={() => {
+                      setModal(!modal);
+                      setVaccine("V8-V10");
+                    }}
+                  
+                    className={`radio-input `}
+                    style={
+                      petHealth.V8_V10
+                        ? { backgroundColor: "#0092ff" }
+                        : { backgroundColor: "#fff" }
+                    }
+                  ></button>
                 </div>
                 <div className="health">
                   <p>Antirábica</p>
-                  <p>Data: {date} </p>
-                  <label for="pet">
-                    <input
-                      onClick={() => setModal(!modal)}
-                      type="radio"
-                      id="pet"
-                      className="radio-input"
-                    ></input>
-                    
-                  </label>
+                  <p>Data: {petHealth.antirabica_date} </p>
+                  <button
+                    onClick={() => {
+                      setModal(!modal);
+                      setVaccine("antirabica");
+                    }}
+                   
+                    className={`radio-input `}
+                    style={
+                      petHealth.antirabica
+                        ? { backgroundColor: "#0092ff" }
+                        : { backgroundColor: "#fff" }
+                    }
+                  ></button>
                 </div>
                 <div className="health">
                   <p>Gripe</p>
-                  <p>Data: {date} </p>
-                  <label for="pet">
-                    <input
-                      onClick={() => setModal(!modal)}
-                      type="radio"
-                      id="pet"
-                      className="radio-input"
-                    ></input>
-                    
-                  </label>
+                  <p>Data: {petHealth.gripe_date} </p>
+                  <button
+
+                    onClick={() => {
+                      setModal(!modal);
+                      setVaccine("gripe");
+                    }}
+                    className={`radio-input `}
+                  
+                    style={
+                      petHealth.gripe
+                        ? { backgroundColor: "#0092ff" }
+                        : { backgroundColor: "#fff" }
+                    }
+                  ></button>
                 </div>
               </div>
-              <ModalDate modal={modal} setModal={setModal} />
+            
               <div className="health-box">
                 Vermífugo:
                 <div className="health">
                   <p>1° semestre</p>
-                  <p>{date}</p>
-                  <label for="verm1">
-                    <input
-                      onClick={() => setModal(!modal)}
-                      type="radio"
-                      id="verm1"
-                      className="radio-input"
-                    ></input>
-                    
-                  </label>
+                  <p>{petHealth.verm1_date}</p>
+                  <button
+                    onClick={() => {
+                      setModal(!modal);
+                      setVaccine("verm1");
+                    }}
+                    className={`radio-input `}
+                   
+                    style={
+                      petHealth.verm1
+                        ? { backgroundColor: "#0092ff" }
+                        : { backgroundColor: "#fff" }
+                    }
+                  ></button>
                   <p>2° semestre</p>
-                  <p>{date}</p>
-                  <label for="verm2">
-                    <input
-                      onClick={() => setModal(!modal)}
-                      type="radio"
-                      id="verm2"
-                      className="radio-input"
-                    ></input>
-                    
-                  </label>
+                  <p>{petHealth.verm2_date}</p>
+                  <button
+                    onClick={() => {
+                      setModal(!modal);
+                      setVaccine("verm2");
+                    }}
+                    className={`radio-input `}
+                
+                    style={
+                      petHealth.verm2
+                        ? { backgroundColor: "#0092ff" }
+                        : { backgroundColor: "#fff" }
+                    }
+                  ></button>
                 </div>
               </div>
-              {/* <label for="pet">
-              <input type="radio" id="pet" className="radio-input"></input>Gripe
-            </label>{" "} */}
             </DogInfo>
+            <ModalDate
+                modal={modal}
+                setModal={setModal}
+                URL={URL_DATE}
+                disabledRadio={disabledRadio}
+                setDisabledRadio={setDisabledRadio}
+              />
           </div>
         </Style>
         <Footer />
@@ -128,7 +173,7 @@ export default function PetInfo() {
     ) : (
       <>
         <Header />
-         <Style>
+        <Style>
           <div className="top">
             <h1>{pet.name}</h1>
             <div className="img-box">
@@ -145,64 +190,81 @@ export default function PetInfo() {
                 Vacinas:
                 <div className="health">
                   <p>Quádrupla</p>
-                  <p>Data: {date} </p>
-                  <label for="pet">
-                    <input
-                     onClick={() => setModal(!modal)}
-                     checked = {modal}
-                      type="radio"
-                      id="pet"
-                      className="radio-input"
-                    ></input>
-                     {console.log(modal)}
-                    
-                  </label>
+                  <p>Data: {petHealth.quadrupla_date} </p>
+                  <button
+                    onClick={() => {
+                      setModal(!modal);
+                      setVaccine("quadrupla");
+                    }}
+                    className={`radio-input `}
+                
+                    style={
+                      petHealth.quadrupla
+                        ? { backgroundColor: "#0092ff" }
+                        : { backgroundColor: "#fff" }
+                    }
+                  ></button>
                 </div>
                 <div className="health">
                   <p>Antirábica</p>
-                  <p>Data: {date} </p>
-                  <label for="pet">
-                    <input
-                      onClick={() => setModal(!modal)}
-                      type="radio"
-                      id="pet"
-                      className="radio-input"
-                    ></input>
-                    
-                  </label>
+                  <p>Data: {petHealth.antirabica_date} </p>
+                  <button
+                    onClick={() => {
+                      setModal(!modal);
+                      setVaccine("antirabica");
+                    }}
+                    className={`radio-input `}
+                
+                    style={
+                      petHealth.antirabica
+                        ? { backgroundColor: "#0092ff" }
+                        : { backgroundColor: "#fff" }
+                    }
+                  ></button>
                 </div>
               </div>
-              <ModalDate modal={modal} setModal={setModal} />
+              <ModalDate
+                modal={modal}
+                setModal={setModal}
+                URL={URL_DATE}
+                disabledRadio={disabledRadio}
+                setDisabledRadio={setDisabledRadio}
+              />
               <div className="health-box">
                 Vermífugo:
                 <div className="health">
                   <p>1° semestre</p>
-                  <p>{date}</p>
-                  <label for="verm1">
-                    <input
-                      onClick={() => setModal(!modal)}
-                      type="radio"
-                      id="verm1"
-                      className="radio-input"
-                    ></input>
-                    
-                  </label>
+                  <p>{petHealth.verm1_date}</p>
+                  <button
+                    onClick={() => {
+                      setModal(!modal);
+                      setVaccine("verm1");
+                    }}
+                    className={`radio-input `}
+                
+                    style={
+                      petHealth.verm1
+                        ? { backgroundColor: "#0092ff" }
+                        : { backgroundColor: "#fff" }
+                    }
+                  ></button>
                   <p>2° semestre</p>
-                  <p>{date}</p>
-                  <label for="verm2">
-                    <input
-                      onClick={() => setModal(!modal)}
-                      type="radio"
-                      id="verm2"
-                      className="radio-input"
-                    ></input>
-                    
-                  </label>
+                  <p>{petHealth.verm2_date}</p>
+                  <button
+                    onClick={() => {
+                      setModal(!modal);
+                      setVaccine("verm2");
+                    }}
+                    className={`radio-input `}
+                
+                    style={
+                      petHealth.verm2
+                        ? { backgroundColor: "#0092ff" }
+                        : { backgroundColor: "#fff" }
+                    }
+                  ></button>
                 </div>
               </div>
-              {/* <label for="pet">
-              <input type="radio" id="pet" className="radio-input"></input>Gripe
-            </label>{" "} */}
             </DogInfo>
           </div>
         </Style>
@@ -232,7 +294,7 @@ const Style = styled.div`
 
   .top {
     width: 100%;
- 
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -243,7 +305,6 @@ const Style = styled.div`
       width: 100px;
       height: 100px;
       position: relative;
-
     }
   }
 
@@ -281,9 +342,15 @@ const Style = styled.div`
 const DogInfo = styled.div`
   width: 100%;
   .radio-input {
-    width: 1.25em;
-    height: 1.25em;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
     margin-right: 10px;
+
+    background-color: #fff;
+  }
+  .marked {
+    background-color: blue;
   }
   label {
     display: inline-flex;
@@ -314,9 +381,12 @@ const DogInfo = styled.div`
     width: 100%;
     justify-content: space-between;
 
-    /* flex-direction: column; */
+    /* flex-direct
+    ion: column; */
   }
-  .health p{
+  .health button {
+  }
+  .health p {
     font-size: 15px;
   }
   p {

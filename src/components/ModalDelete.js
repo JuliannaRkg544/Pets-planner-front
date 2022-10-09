@@ -30,7 +30,8 @@ export default function ModalDelete({ toggleModal, setToggleModal, id, URL }) {
       .catch((e) => {
         console.log(e.response)
         setToggleModal(false) 
-      });
+        console.log("id do delete ", id)
+      }); 
   }
     return (
       <Modal isOpen={toggleModal} onRequestClose={isModalOpen} style={customStyles}>

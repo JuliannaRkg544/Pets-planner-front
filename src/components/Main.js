@@ -29,17 +29,18 @@ export default function Main() {
   }, [del]);
 
   if (petArr.length > 0) {
-    if (petArr.isAcat) {
-      nature = "cat";
-    } else nature = "dog";
+    
     return (
       <Style>
         <Header />
         <p> {dayjs().locale("PT-BR").format("dddd, DD/MM")} </p>
         {petArr.map((pet) => {
+          if (pet.isCat) {
+            nature = "cat";
+          } else nature = "dog";
           return (
-            <PetStyle>
-              <Link to={`/pet/get/${pet.id}`}> {pet.name} </Link>
+            <PetStyle key={pet.id} >
+              <Link to={`/pet/get/${nature}/${pet.id}`}> {pet.name} </Link>
               <span
                 onClick={() => {
                   setIdpet(pet.id);

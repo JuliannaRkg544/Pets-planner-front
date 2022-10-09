@@ -7,11 +7,11 @@ import Modal from "react-modal";
 import { ModalStyle } from "../styledComponents/ModalStyle";
 import { customStyles } from "../styledComponents/ModalStyle";
 
-export default function ModalDate({ modal, setModal }) {
+export default function ModalDate({ modal, setModal, URL, disabledRadio, setDisabledRadio }) {
   const [date, setDate] = useState("");
   const token = localStorage.getItem("token");
-  const URL = ``;
-  const body = {date}
+ 
+  const body = {date} 
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -25,8 +25,9 @@ export default function ModalDate({ modal, setModal }) {
     axios
       .patch(URL,body,config)
       .then((response) => {
-        console.log(response.data);
+        console.log("data date modal ",response.data);
         setModal(false);
+        setDisabledRadio(!disabledRadio)
       })
       .catch((e) => {
         console.log(e.response);
@@ -39,6 +40,7 @@ export default function ModalDate({ modal, setModal }) {
         <input
           type="text"
           value={date}
+          placeholder="dd/mm/aaaa"
           onChange={(e) => {
             setDate(e.target.value);
           }}

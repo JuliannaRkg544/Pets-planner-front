@@ -22,7 +22,7 @@ function App() {
           <Route path="/to-do-list" element={<ToDoList />} />
           <Route path="/health-card" element={<HealthCard />} />
           <Route path="/signup-pet" element={<SignupPet />} />
-          <Route path="/pet/get/:idPet" element={<PetInfo />} />
+          <Route path="/pet/get/:idNature/:idPet" element={<PetInfo />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>

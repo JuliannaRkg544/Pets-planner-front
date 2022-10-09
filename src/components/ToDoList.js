@@ -43,7 +43,6 @@ export default function ToDoList() {
 
   function riskTask(index, taskid) {
     const URL_PATCH = `http://localhost:4000/pet/task/patch/${taskid}`;
-    // const body = { ...tasks[index] };
     const body = {
       isDone: tasks[index].done,
     };
@@ -84,6 +83,7 @@ export default function ToDoList() {
                   toggleModal={del}
                   setToggleModal={setDel}
                   id={idTask}
+                  URL = {URL_DELETE_TASK}
                 />
               </div>
             ) : (
