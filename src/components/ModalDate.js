@@ -1,7 +1,4 @@
 import axios from "axios";
-import dayjs from "dayjs";
-import "dayjs/locale/pt-br";
-import { config } from "dotenv";
 import { useState } from "react";
 import Modal from "react-modal";
 import { ModalStyle } from "../styledComponents/ModalStyle";

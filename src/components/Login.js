@@ -4,8 +4,9 @@ import { Rigth } from "../styledComponents/Container";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
-
 import UserContext from "../Context/UserContext"
+
+
 
 export default function Login() {
   const { user, setUser } = useContext(UserContext)
@@ -15,7 +16,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
  
 
-  const URL_POST = "http://localhost:4000/login";
+  const URL_POST = `${process.env.REACT_APP_API_URL}/login`
   const body = {
     email: email,
     password: password,

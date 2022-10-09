@@ -17,9 +17,9 @@ export default function ToDoList() {
   const [idTask,setIdtask] = useState()
   const { user, setUSer } = useContext(UserContext);
   const [marked, setMarked] = useState(false);
-  // const {token} = user
+ 
   const token = localStorage.getItem("token");
-  const URL_DELETE_TASK = `http://localhost:4000/pet/task/delete/${idTask}`;
+  const URL_DELETE_TASK = `${REACT_APP_API_URL}/pet/task/delete/${idTask}`;
 
   const config = {
     headers: {

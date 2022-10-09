@@ -17,7 +17,7 @@ export default function SignupPet() {
 
   const navigate = useNavigate();
 
-  const URL = "http://localhost:4000/pet/new";
+  const URL = `${REACT_APP_API_URL}/pet/new`
   const body = {
     name,
     birthdate,

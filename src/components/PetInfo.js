@@ -10,17 +10,17 @@ import logoCat from "../assets/imgs/cat-logo.png";
 
 export default function PetInfo() {
   const [petInfo, setPetInfo] = useState([]);
-  const [date, setDate] = useState("");
   const [modal, setModal] = useState(false);
-  const token = localStorage.getItem("token");
   const [vaccine, setVaccine] = useState("");
   const [disabledRadio, setDisabledRadio] = useState(false);
+  const token = localStorage.getItem("token");
+  
   let petHealth = []
-
   const { idPet } = useParams();
   const { idNature } = useParams();
-  const URL = `http://localhost:4000/pet/get/${idNature}/${idPet}`;
-  const URL_DATE = `http://localhost:4000/pet/health-${idNature}/patch/${vaccine}/${idPet}`;
+
+  const URL = `${REACT_APP_API_URL}/pet/get/${idNature}/${idPet}`;
+  const URL_DATE = `${REACT_APP_API_URL}/pet/health-${idNature}/patch/${vaccine}/${idPet}`;
 
 
   useEffect(() => {
@@ -29,20 +29,12 @@ export default function PetInfo() {
       .then((response) => {
         const { data } = response;
         setPetInfo([data]);
-        // setPetHealth([data[0].Dog])
-        console.log("get pet ", data);
       })
       .catch((error) => {
         console.log(error.response);
       });
   }, [disabledRadio]);
 
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
- 
 
   if (petInfo.length > 0) {
     const petArr = petInfo[0];

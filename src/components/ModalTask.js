@@ -1,23 +1,18 @@
 import axios from "axios";
 import { useContext, useState } from "react";
 import Modal from "react-modal";
-import styled from "styled-components";
-import UserContext from "../Context/UserContext";
 import {ModalStyle} from "../styledComponents/ModalStyle"
 import { customStyles } from "../styledComponents/ModalStyle";
 
 
 export default function ModalTask({ toggleModal, setToggleModal }) {
   const [petTask, setPetTask] = useState("");
-  const {user, setUSer} = useContext(UserContext)
-  // const {token} = user
-
-  const token =localStorage.getItem("token")
+  const token = localStorage.getItem("token")
+  const URL = `${REACT_APP_API_URL}/pet/task/add` 
 
   function sendTask() {
     const body = { 
       description: petTask };
-    const URL = "http://localhost:4000/pet/task/add";
     const config = {
       headers: {
           Authorization: `Bearer ${token}`,

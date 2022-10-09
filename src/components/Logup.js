@@ -7,7 +7,7 @@ import { useState } from "react";
 
 export default function Logup() {
   const navigate = useNavigate()
-  const URL_POST = "http://localhost:4000/logup";
+  const URL_POST = `${process.env.REACT_APP_API_URL}/logup` ;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");

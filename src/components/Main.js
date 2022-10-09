@@ -11,12 +11,12 @@ import ModalDelete from "./ModalDelete";
 export default function Main() {
   const [del, setDel] = useState(false);
   const [petArr, setPetArr] = useState([]);
-  const [change, setChange] = useState(false);
   const [idPet, setIdpet] = useState();
-  // const id = idPet.toString()
-  const URL_DELETE_PET = `http://localhost:4000/pet/delete/${idPet}`;
+  const URL_DELETE_PET = `${process.env.REACT_APP_API_URL}/pet/delete/${idPet}`;
   let nature = "";
-  const URL = "http://localhost:4000/pet/get";
+  const URL = `${process.env.REACT_APP_API_URL}/pet/get`
+
+  
   useEffect(() => {
     axios
       .get(URL)
