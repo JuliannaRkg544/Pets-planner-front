@@ -50,16 +50,16 @@ export default function PetInfo() {
     const petArr = petInfo[0];
     console.log("pet info ", petInfo[0], "nature ", nature)
     const pet = petArr[0];
-    // if( idNature==="dog") { petHealth = petInfo[0][0].Dog[0] } else {  petHealth = petInfo[0][0].Cat[0]}
+    if( idNature==="dog") { petHealth = petInfo[0][0].Dog[0] } else {  petHealth = petInfo[0][0].Cat[0]}
    
-    // if(pet.isDog){
-    //   if (petInfo[0][0].Dog.length == 0){
-    //     axios.post(URL_POST,{},config)
-    //   } 
-    // } else{
-    //   if (petInfo[0][0].Cat.length == 0){
-    //     axios.post(URL_POST,{},config)
-    // }
+    if(pet.isDog){
+      if (petInfo[0][0].Dog.length == 0){
+        axios.post(URL_POST,{},config)
+      } 
+    } else{
+      if (petInfo[0][0].Cat.length == 0){
+        axios.post(URL_POST,{},config)
+    }}
 
     return pet.isDog ?  (
       
