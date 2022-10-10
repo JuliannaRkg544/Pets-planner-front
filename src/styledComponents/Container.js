@@ -29,6 +29,23 @@ const Style = styled.div`
       height: 500px;
     }
   }
+  @media screen and (max-width: 992px){
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    .left{
+      img{
+        width: 250px;
+        height: 250px;
+      }
+      background-color: #fff;
+
+    }
+
+}
 `;
 
 export const Rigth = styled.div`
@@ -78,4 +95,11 @@ export const Rigth = styled.div`
   a {
     color: #000;
   }
+
+  @media screen and (max-width: 992px){
+    padding: 0;
+    box-shadow: 0 0 0 0;
+    height: auto;
+  }
+
 `;
