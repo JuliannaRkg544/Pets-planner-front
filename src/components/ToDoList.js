@@ -19,15 +19,16 @@ export default function ToDoList() {
   const [marked, setMarked] = useState(false);
  
   const token = localStorage.getItem("token");
-  const URL_DELETE_TASK = `${REACT_APP_API_URL}/pet/task/delete/${idTask}`;
+  const URL_DELETE_TASK = `${process.env.REACT_APP_API_URL}/pet/task/delete/${idTask}`;
+  const URL = `${process.env.REACT_APP_API_URL}/pet/task`;
+
 
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
-  console.log("token ", token);
-  const URL = "http://localhost:4000/pet/task";
+  
 
   useEffect(() => {
     axios
@@ -42,7 +43,7 @@ export default function ToDoList() {
   }, [toggleModal, del, marked]);
 
   function riskTask(index, taskid) {
-    const URL_PATCH = `http://localhost:4000/pet/task/patch/${taskid}`;
+    const URL_PATCH = `${process.env.REACT_APP_API_URL}/pet/task/patch/${taskid}`;
     const body = {
       isDone: tasks[index].done,
     };
@@ -55,7 +56,7 @@ export default function ToDoList() {
         setMarked(!marked);
       })
       .catch((e) => console.log(e.response));
-  }
+  } 
 
   if (tasks.length > 0) {
     return (
@@ -130,7 +131,7 @@ export default function ToDoList() {
         <ToDoListStyle>
           <Button>
             {" "}
-            <p onClick={() => setToggleModal(!toggleModal)}> Add task</p>
+            <span onClick={() => setToggleModal(!toggleModal)}> Add task</span>
           </Button>
           <ModalTask
             toggleModal={toggleModal}

@@ -68,7 +68,13 @@ export default function Main() {
   } else
     return (
       <Style>
+        <Header/> 
         <p>Cadastre seu pet!</p>
+        <Link className="main" to={"/signup-pet"}>
+          {" "}
+          <button>New Baby</button>
+        </Link>
+        <Footer/>
       </Style>
     );
 }
@@ -79,6 +85,7 @@ const Style = styled.div`
   padding: 15% 20%;
   align-items: center;
   justify-content: center;
+  margin-top: 80px;
   button {
     width: 303px;
     height: 45px;

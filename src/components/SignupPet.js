@@ -1,9 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import styled from "styled-components";
 import Input from "../styledComponents/Inputs";
-import Button from "../styledComponents/SubmmitButton";
 import Footer from "./Footer";
 import Header from "./Header";
 
@@ -17,7 +15,7 @@ export default function SignupPet() {
 
   const navigate = useNavigate();
 
-  const URL = `${REACT_APP_API_URL}/pet/new`
+  const URL = `${process.env.REACT_APP_API_URL}/pet/new`
   const body = {
     name,
     birthdate,
@@ -34,7 +32,7 @@ export default function SignupPet() {
       .then((response) => {
         const { data } = response;
         console.log(data);
-        navigate("/");
+        navigate("/pets");
       })
       .catch((error) => {
         console.log(error.response);
@@ -42,13 +40,14 @@ export default function SignupPet() {
       });
   }
 
+
   return (
     <>
       <Header />
       <Input>
         <p>New baby</p>
 
-        <form onSubmit={submmit} encType="multipart/form-data">
+        <form onSubmit={submmit}>
           <input
             required
             type="text"
@@ -59,7 +58,7 @@ export default function SignupPet() {
           <input
             required
             type="text"
-            placeholder="birthdate"
+            placeholder="birthdate dd/mm/aaaa"
             value={birthdate}
             onChange={(e) => setBirthdate(e.target.value)}
           ></input>
@@ -110,10 +109,10 @@ export default function SignupPet() {
             dog
           </label>
 
-          {/* <input type="file" name="image"></input> */}
+       
           <input type="submit"></input>
         </form>
-        {/* <Button onClick={()=>submmit}>Cadastrar</Button> */}
+
       </Input>
       <Footer />
     </>

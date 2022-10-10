@@ -8,16 +8,15 @@ import SignupPet from "./SignupPet";
 import PetInfo from "./PetInfo";
 import { useContext, useState } from "react";
 import UserContext from "../Context/UserContext";
-
-
+ 
 function App() {
   const [user, setUser] = useState("");
   return (
     <UserContext.Provider value={{ user, setUser }} >
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/pets" element={<Main />} />
           <Route path="/logup" element={<Logup />} />
           <Route path="/to-do-list" element={<ToDoList />} />
           <Route path="/health-card" element={<HealthCard />} />

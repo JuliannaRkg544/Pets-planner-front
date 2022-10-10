@@ -5,6 +5,7 @@ export default function Button({ children }) {
 }
 
 const Style = styled.div`
+margin-top: 30px;
   span {
     width: 220px;
     height: 60px;

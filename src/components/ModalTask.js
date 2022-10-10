@@ -8,7 +8,7 @@ import { customStyles } from "../styledComponents/ModalStyle";
 export default function ModalTask({ toggleModal, setToggleModal }) {
   const [petTask, setPetTask] = useState("");
   const token = localStorage.getItem("token")
-  const URL = `${REACT_APP_API_URL}/pet/task/add` 
+  const URL = `${process.env.REACT_APP_API_URL}/pet/task/add` 
 
   function sendTask() {
     const body = { 

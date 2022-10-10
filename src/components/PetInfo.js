@@ -14,15 +14,22 @@ export default function PetInfo() {
   const [vaccine, setVaccine] = useState("");
   const [disabledRadio, setDisabledRadio] = useState(false);
   const token = localStorage.getItem("token");
+  let nature = ""
   
   let petHealth = []
   const { idPet } = useParams();
   const { idNature } = useParams();
 
-  const URL = `${REACT_APP_API_URL}/pet/get/${idNature}/${idPet}`;
-  const URL_DATE = `${REACT_APP_API_URL}/pet/health-${idNature}/patch/${vaccine}/${idPet}`;
+  const URL = `${process.env.REACT_APP_API_URL}/pet/get/${idNature}/${idPet}`;
+  const URL_DATE = `${process.env.REACT_APP_API_URL}/pet/health-${idNature}/patch/${vaccine}/${idPet}`;
+  const URL_POST = `${process.env.REACT_APP_API_URL}/pet/health-${idNature}/post/${idPet}`
 
-
+  if( idNature==="dog") {nature = "Dog"} else {nature = "Cat"}
+  const config = {
+    headers: {
+        Authorization: `Bearer ${token}`,
+    },
+  }
   useEffect(() => {
     axios
       .get(URL)
@@ -35,16 +42,29 @@ export default function PetInfo() {
       });
   }, [disabledRadio]);
 
-
-  if (petInfo.length > 0) {
-    const petArr = petInfo[0];
-    const pet = petArr[0];
-    if( idNature==="dog") { petHealth = petInfo[0][0].Dog[0] } else {  petHealth = petInfo[0][0].Cat[0]}
-   
   
+  
+  
+  if (petInfo.length > 0) {
+  
+    const petArr = petInfo[0];
+    console.log("pet info ", petInfo[0], "nature ", nature)
+    const pet = petArr[0];
+    // if( idNature==="dog") { petHealth = petInfo[0][0].Dog[0] } else {  petHealth = petInfo[0][0].Cat[0]}
+   
+    // if(pet.isDog){
+    //   if (petInfo[0][0].Dog.length == 0){
+    //     axios.post(URL_POST,{},config)
+    //   } 
+    // } else{
+    //   if (petInfo[0][0].Cat.length == 0){
+    //     axios.post(URL_POST,{},config)
+    // }
 
-    return pet.isDog ? (
+    return pet.isDog ?  (
+      
       <>
+
         <Header />
         <Style>
           <div className="top">
@@ -73,7 +93,7 @@ export default function PetInfo() {
                     className={`radio-input `}
                     style={
                       petHealth.V8_V10
-                        ? { backgroundColor: "#0092ff" }
+                        ? { backgroundColor: "#577ae4" }
                         : { backgroundColor: "#fff" }
                     }
                   ></button>
@@ -90,7 +110,7 @@ export default function PetInfo() {
                     className={`radio-input `}
                     style={
                       petHealth.antirabica
-                        ? { backgroundColor: "#0092ff" }
+                        ? { backgroundColor: "#577ae4" }
                         : { backgroundColor: "#fff" }
                     }
                   ></button>
@@ -108,7 +128,7 @@ export default function PetInfo() {
                   
                     style={
                       petHealth.gripe
-                        ? { backgroundColor: "#0092ff" }
+                        ? { backgroundColor: "#577ae4" }
                         : { backgroundColor: "#fff" }
                     }
                   ></button>
@@ -129,7 +149,7 @@ export default function PetInfo() {
                    
                     style={
                       petHealth.verm1
-                        ? { backgroundColor: "#0092ff" }
+                        ? { backgroundColor: "#577ae4" }
                         : { backgroundColor: "#fff" }
                     }
                   ></button>
@@ -144,7 +164,7 @@ export default function PetInfo() {
                 
                     style={
                       petHealth.verm2
-                        ? { backgroundColor: "#0092ff" }
+                        ? { backgroundColor: "#577ae4" }
                         : { backgroundColor: "#fff" }
                     }
                   ></button>
@@ -162,7 +182,8 @@ export default function PetInfo() {
         </Style>
         <Footer />
       </>
-    ) : (
+    ) :  (
+    
       <>
         <Header />
         <Style>
@@ -192,7 +213,7 @@ export default function PetInfo() {
                 
                     style={
                       petHealth.quadrupla
-                        ? { backgroundColor: "#0092ff" }
+                        ? { backgroundColor: "#577ae4" }
                         : { backgroundColor: "#fff" }
                     }
                   ></button>
@@ -209,7 +230,7 @@ export default function PetInfo() {
                 
                     style={
                       petHealth.antirabica
-                        ? { backgroundColor: "#0092ff" }
+                        ? { backgroundColor: "#577ae4" }
                         : { backgroundColor: "#fff" }
                     }
                   ></button>
@@ -236,11 +257,11 @@ export default function PetInfo() {
                 
                     style={
                       petHealth.verm1
-                        ? { backgroundColor: "#0092ff" }
+                        ? { backgroundColor: "#577ae4" }
                         : { backgroundColor: "#fff" }
                     }
                   ></button>
-                  <p>2° semestre</p>
+                  <p >2° semestre</p>
                   <p>{petHealth.verm2_date}</p>
                   <button
                     onClick={() => {
@@ -251,7 +272,7 @@ export default function PetInfo() {
                 
                     style={
                       petHealth.verm2
-                        ? { backgroundColor: "#0092ff" }
+                        ? { backgroundColor: "#577ae4" }
                         : { backgroundColor: "#fff" }
                     }
                   ></button>
@@ -263,7 +284,7 @@ export default function PetInfo() {
         <Footer />
       </>
     );
-  } else
+  } else 
     return (
       <>
         <Header />
@@ -333,12 +354,14 @@ const Style = styled.div`
 
 const DogInfo = styled.div`
   width: 100%;
+
   .radio-input {
     width: 18px;
     height: 18px;
-    border-radius: 50%;
+    border: 4px solid #fff;
+    border-radius: 50%  ;
     margin-right: 10px;
-
+    
     background-color: #fff;
   }
   .marked {
@@ -364,10 +387,12 @@ const DogInfo = styled.div`
     justify-content: center;
     font-size: 18px;
     flex-direction: column;
+ 
     width: 100%;
   }
   .health {
     display: flex;
+    /* flex-wrap: wrap; */
     align-items: center;
     font-size: 18px;
     width: 100%;

@@ -9,7 +9,7 @@ export default function Footer() {
           {" "}
           <span>List</span>{" "}
         </Link>
-        <Link to={"/"}>
+        <Link to={"/pets"}>
           {" "}
           <div className="main">Pets</div>{" "}
         </Link>

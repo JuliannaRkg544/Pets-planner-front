@@ -33,7 +33,7 @@ export default function Login() {
         setUser(data)
         localStorage.setItem("token", data.token)
 
-        navigate("/")
+        navigate("/pets")
       })
       .catch((err) => {
         console.log("deu erro", err.response);
