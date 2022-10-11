@@ -13,13 +13,19 @@ export default function Main() {
   const [petArr, setPetArr] = useState([]);
   const [idPet, setIdpet] = useState();
   const URL_DELETE_PET = `${process.env.REACT_APP_API_URL}/pet/delete/${idPet}`;
+  const token = localStorage.getItem("token")
   let nature = "";
-  const URL = `${process.env.REACT_APP_API_URL}/pet/get`
+  const URL_GET = `${process.env.REACT_APP_API_URL}/pet/get`
 
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
   
   useEffect(() => {
     axios
-      .get(URL)
+      .get(URL_GET,config)
       .then((response) => {
         const { data } = response;
         console.log(data);

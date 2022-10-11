@@ -129,6 +129,7 @@ export default function ToDoList() {
       <>
         <Header />
         <ToDoListStyle>
+        <h1> {dayjs().locale("PT-BR").format("dddd, DD/MM")} </h1>
           <Button>
             {" "}
             <span onClick={() => setToggleModal(!toggleModal)}> Add task</span>

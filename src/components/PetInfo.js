@@ -36,6 +36,7 @@ export default function PetInfo() {
       .then((response) => {
         const { data } = response;
         setPetInfo([data]);
+        
       })
       .catch((error) => {
         console.log(error.response);
@@ -54,11 +55,11 @@ export default function PetInfo() {
    
     if(pet.isDog){
       if (petInfo[0][0].Dog.length == 0){
-        axios.post(URL_POST,{},config).then(setDisabledRadio(!disabledRadio))
+        axios.post(URL_POST,{},config).then(document.location.reload()).then(err=>console.log(err.response))
       } 
     } else{
       if (petInfo[0][0].Cat.length == 0){
-        axios.post(URL_POST,{},config).then(setDisabledRadio(!disabledRadio))
+        axios.post(URL_POST,{},config).then(document.location.reload()).then(err=>console.log(err.response))
     }}
 
     return pet.isDog ?  (

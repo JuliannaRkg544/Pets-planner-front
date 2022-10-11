@@ -28,7 +28,8 @@ export default function ModalDate({ modal, setModal, URL, disabledRadio, setDisa
       })
       .catch((e) => {
         console.log(e.response);
-        setModal(false);
+        alert("date must follow format dd/mm/aaaa")
+        // setModal(false);
       });
   }
   return (

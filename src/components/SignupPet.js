@@ -12,10 +12,17 @@ export default function SignupPet() {
   const [breed, setBreed] = useState("");
   const [cat, setCat] = useState(false);
   const [dog, setDog] = useState(false);
+  const token = localStorage.getItem("token")
 
   const navigate = useNavigate();
 
   const URL = `${process.env.REACT_APP_API_URL}/pet/new`
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
   const body = {
     name,
     birthdate,
@@ -28,7 +35,7 @@ export default function SignupPet() {
   function submmit(event) {
     event.preventDefault();
     axios
-      .post(URL, body)
+      .post(URL, body, config)
       .then((response) => {
         const { data } = response;
         console.log(data);
