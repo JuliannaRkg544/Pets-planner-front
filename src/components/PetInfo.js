@@ -54,11 +54,11 @@ export default function PetInfo() {
    
     if(pet.isDog){
       if (petInfo[0][0].Dog.length == 0){
-        axios.post(URL_POST,{},config)
+        axios.post(URL_POST,{},config).then(setDisabledRadio(!disabledRadio))
       } 
     } else{
       if (petInfo[0][0].Cat.length == 0){
-        axios.post(URL_POST,{},config)
+        axios.post(URL_POST,{},config).then(setDisabledRadio(!disabledRadio))
     }}
 
     return pet.isDog ?  (

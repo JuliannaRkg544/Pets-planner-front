@@ -13,8 +13,6 @@ const Style = styled.div`
   width: 100%;
   background-color: #fff;
 
-  /* margin-right: 50px; */
-
   .left {
     display: flex;
     padding: 50px;
@@ -27,22 +25,29 @@ const Style = styled.div`
     img {
       width: 500px;
       height: 500px;
+      
     }
   }
   @media screen and (max-width: 992px){
+   
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
+    
     .left{
       img{
         width: 250px;
         height: 250px;
+       
       }
+      width: auto;
+      height: auto;
+      display: flex;
       background-color: #fff;
-
+      padding: 0;
     }
 
 }
@@ -100,6 +105,10 @@ export const Rigth = styled.div`
     padding: 0;
     box-shadow: 0 0 0 0;
     height: auto;
+    margin-bottom: 50px;
+    a{
+      margin-bottom: 50px;
+    }
   }
 
 `;

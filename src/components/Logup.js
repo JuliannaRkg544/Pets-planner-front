@@ -27,11 +27,12 @@ export default function Logup() {
       .post(URL_POST, body)
       .then((response) => {
         const { data } = response;
+        console.log(data)
         navigate("/");
       })
       .catch((error) => {
         console.log(error.response);
-        alert("humm, algo está errado");
+        alert(error.response.data[0].message);
       });
   }
 
@@ -61,7 +62,7 @@ export default function Logup() {
           onChange={(e) => setPassword(e.target.value)}
         ></input>
         <input
-          type="url"
+          type="password"
           placeholder="Confirmar senha"
           value={passwordConfirmation}
           onChange={(e) => setpasswordConfirmation(e.target.value)}
