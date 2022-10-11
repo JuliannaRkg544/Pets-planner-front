@@ -64,7 +64,7 @@ export default function ToDoList() {
         <ToDoListStyle>
           <h1> {dayjs().locale("PT-BR").format("dddd, DD/MM")} </h1>
           {tasks.map((task, index) => {
-            return task.done ? (
+            return !task.done ? (
               <div className="single-task">
                  <p>{task.description}</p>
                <div className="buttons">
