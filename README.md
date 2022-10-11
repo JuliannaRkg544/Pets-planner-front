@@ -1,10 +1,8 @@
-# Pet's Planner
+# <p  align="center" > Pet's Planner  </p>
 
-
-
+<div align="center">
 <img src = "https://user-images.githubusercontent.com/83621608/194782193-a175896f-ba6a-4c0f-b3da-d8669e3f5014.png" width="500" align="middle"/>
-
-
+</div>
 
 
 ## Sobre
