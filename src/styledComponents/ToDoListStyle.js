@@ -13,12 +13,21 @@ const Style = styled.div`
   h1{
    
   }
-  .underline{
-    text-decoration: line-through;
-    color: var(--fontgrey);
+
+  ion-icon{
+    margin-right: 8px;
+  }
+  .buttons{
+    display: flex;
+    display: flex;
+    width: 100%;
+    justify-content: end;
     
   }
- 
+  .-outline{
+    color: var(--fontgrey);
+    text-decoration: line-through;
+  }
   span, p{
     cursor: pointer;
   }

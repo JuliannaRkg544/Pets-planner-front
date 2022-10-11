@@ -14,21 +14,20 @@ export default function ToDoList() {
   const [toggleModal, setToggleModal] = useState(false);
   const [tasks, setTasks] = useState([]);
   const [del, setDel] = useState(false);
-  const [idTask,setIdtask] = useState()
+  const [idTask, setIdtask] = useState();
   const { user, setUSer } = useContext(UserContext);
   const [marked, setMarked] = useState(false);
- 
+  const [filled,setFilled] = useState("-outline")
+
   const token = localStorage.getItem("token");
   const URL_DELETE_TASK = `${process.env.REACT_APP_API_URL}/pet/task/delete/${idTask}`;
   const URL = `${process.env.REACT_APP_API_URL}/pet/task`;
-
 
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
-  
 
   useEffect(() => {
     axios
@@ -56,7 +55,7 @@ export default function ToDoList() {
         setMarked(!marked);
       })
       .catch((e) => console.log(e.response));
-  } 
+  }
 
   if (tasks.length > 0) {
     return (
@@ -67,36 +66,61 @@ export default function ToDoList() {
           {tasks.map((task, index) => {
             return task.done ? (
               <div className="single-task">
-                <p
-                  onClick={() =>{ riskTask(index, task.id) 
-                 } }
-                  className="underline"
+                 <p>{task.description}</p>
+               <div className="buttons">
+               <span  className="mark-underline" 
+                  onClick={() => {
+                    riskTask(index, task.id);
+                   
+                  }}
+                 
                 >
-                  {task.description}
-                </p>
-                <span onClick={() => {
-                  setDel(!del)
-                setIdtask(task.id) 
-                 console.log("id do list ",task.id)}}>
+                  <ion-icon name={`checkbox${filled}`}></ion-icon>
+                </span>
+                <span className="delete"
+                  onClick={() => {
+                    setDel(!del);
+                    setIdtask(task.id);
+                    console.log("id do list ", task.id);
+                  }}
+                >
                   <ion-icon name="trash-outline"></ion-icon>
                 </span>
+               </div>
+               
+
                 <ModalDelete
                   toggleModal={del}
                   setToggleModal={setDel}
                   id={idTask}
-                  URL = {URL_DELETE_TASK}
+                  URL={URL_DELETE_TASK}
                 />
               </div>
             ) : (
               <div className="single-task">
-                <p onClick={() => riskTask(index, task.id)}>
+                <p className={filled} onClick={() => riskTask(index, task.id)}>
                   {" "}
                   {task.description}{" "}
                 </p>
-                <span onClick={() => {setDel(!del)
-                 setIdtask(task.id)}}>
+                <div className="buttons">
+                <span  
+                  onClick={() => {
+                    riskTask(index, task.id);
+                  }}
+                 
+                >
+                  <ion-icon name={`checkbox${filled}`}></ion-icon>
+                </span>
+                <span
+                  onClick={() => {
+                    setDel(!del);
+                    setIdtask(task.id);
+                  }}
+                >
                   <ion-icon name="trash-outline"></ion-icon>
                 </span>
+
+                </div>
                 <ModalDelete
                   toggleModal={del}
                   setToggleModal={setDel}
@@ -129,7 +153,7 @@ export default function ToDoList() {
       <>
         <Header />
         <ToDoListStyle>
-        <h1> {dayjs().locale("PT-BR").format("dddd, DD/MM")} </h1>
+          <h1> {dayjs().locale("PT-BR").format("dddd, DD/MM")} </h1>
           <Button>
             {" "}
             <span onClick={() => setToggleModal(!toggleModal)}> Add task</span>
