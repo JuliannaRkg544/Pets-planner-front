@@ -66,7 +66,10 @@ export default function ToDoList() {
           {tasks.map((task, index) => {
             return !task.done ? (
               <div className="single-task">
-                 <p>{task.description}</p>
+                  <p onClick={() => riskTask(index, task.id)}>
+                  {task.description}
+                  </p>
+                 
                <div className="buttons">
                <span  className="mark-underline" 
                   onClick={() => {

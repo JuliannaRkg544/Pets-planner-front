@@ -5,6 +5,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import UserContext from "../Context/UserContext"
+import Loading from "./Loading";
 
 
 
@@ -14,6 +15,8 @@ export default function Login() {
 
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [disabled, setDisabled] = useState(false)
+
  
 
   const URL_POST = `${process.env.REACT_APP_API_URL}/login`
@@ -24,6 +27,7 @@ export default function Login() {
 
   function login(event) {
     event.preventDefault();
+    setDisabled(true)
 
     axios
       .post(URL_POST, body)
@@ -38,6 +42,7 @@ export default function Login() {
       .catch((err) => {
         console.log("deu erro", err.response);
         alert(err.response.statusText);
+        setDisabled(false)
       });
   }
 
@@ -59,7 +64,7 @@ export default function Login() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         ></input>
-        <button onClick={login}> Entrar</button>
+        <button onClick={login} >{disabled? <Loading/> : "Entrar"} </button>
         <Link to={"/logup"}>
           <span>Não tem conta? Cadastre-se</span>
         </Link>

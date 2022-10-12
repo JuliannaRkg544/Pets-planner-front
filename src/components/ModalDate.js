@@ -8,7 +8,7 @@ export default function ModalDate({ modal, setModal, URL, disabledRadio, setDisa
   const [date, setDate] = useState("");
   const token = localStorage.getItem("token");
  
-  const body = {date} 
+  const body = {date:date.split("-").reverse().join("/")} 
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -24,6 +24,7 @@ export default function ModalDate({ modal, setModal, URL, disabledRadio, setDisa
       .then((response) => {
         console.log("data date modal ",response.data);
         setModal(false);
+        console.log(date)
         setDisabledRadio(!disabledRadio)
       })
       .catch((e) => {
@@ -36,7 +37,7 @@ export default function ModalDate({ modal, setModal, URL, disabledRadio, setDisa
     <Modal isOpen={modal} onRequestClose={isModalOpen} style={customStyles}>
       <ModalStyle>
         <input
-          type="text"
+          type="date"
           value={date}
           placeholder="dd/mm/aaaa"
           onChange={(e) => {

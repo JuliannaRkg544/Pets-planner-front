@@ -2,8 +2,10 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import Input from "../styledComponents/Inputs";
+import Button from "../styledComponents/SubmmitButton";
 import Footer from "./Footer";
 import Header from "./Header";
+import Loading from "./Loading";
 
 export default function SignupPet() {
   const [name, setName] = useState("");
@@ -12,11 +14,14 @@ export default function SignupPet() {
   const [breed, setBreed] = useState("");
   const [cat, setCat] = useState(false);
   const [dog, setDog] = useState(false);
-  const token = localStorage.getItem("token")
+  const [input1,setInput1] = useState(false)
+  const [input2,setInput2] = useState(false)
+  const token = localStorage.getItem("token");
+  const [disabled, setDisabled] = useState(false);
 
   const navigate = useNavigate();
 
-  const URL = `${process.env.REACT_APP_API_URL}/pet/new`
+  const URL = `${process.env.REACT_APP_API_URL}/pet/new`;
 
   const config = {
     headers: {
@@ -25,14 +30,15 @@ export default function SignupPet() {
   };
   const body = {
     name,
-    birthdate,
+    birthdate: birthdate.split("-").reverse().join("/"),
     genre,
     breed,
-    isCat:cat,
-    isDog:dog
+    isCat: cat,
+    isDog: dog,
   };
 
   function submmit(event) {
+    setDisabled(true);
     event.preventDefault();
     axios
       .post(URL, body, config)
@@ -44,9 +50,9 @@ export default function SignupPet() {
       .catch((error) => {
         console.log(error.response);
         alert(error.response.data[0].message);
+        setDisabled(false);
       });
   }
-
 
   return (
     <>
@@ -64,62 +70,82 @@ export default function SignupPet() {
           ></input>
           <input
             required
-            type="text"
-            placeholder="birthdate dd/mm/aaaa"
+            type="date"
+            placeholder="dd/mm/aaaa"
             value={birthdate}
             onChange={(e) => setBirthdate(e.target.value)}
           ></input>
+          <label for="genre" >
+            <input
+              required
+              type="radio"
+              name="genre"
+              id="genre"
+              value={input1}
+              className="radio-input"
+              onClick={() => {
+                setGenre("Macho");
+              }}
+            ></input>
+            macho
+          </label>
+          <label for="genre" >
+            <input
+              required
+              id="genre"
+              value={input2}
+              type="radio"
+              name="genre"
+              className="radio-input"
+              onClick={() => {
+                setGenre("Fêmea");
+              }}
+            ></input>
+            fêmea
+          </label>
           <input
             required
             type="text"
-            placeholder="genre"
-            value={genre}
-            onChange={(e) => setGenre(e.target.value)}
-          ></input>
-          <input
-            required
-            type="text"
+           
             placeholder="breed"
             value={breed}
             onChange={(e) => setBreed(e.target.value)}
           ></input>
-          <label for="radioCat">
+          <label for = "nature" >
             <input
               required
               type="radio"
-              name="pet"
+              name="nature"
               value={cat}
-              id="radioCat"
+              id = "nature"
               className="radio-input"
               onClick={() => {
                 setCat(true);
                 setDog(false);
-                console.log("cat ", cat, "dog ", dog)
               }}
             ></input>
             cat
           </label>
-          <label for="radioDog">
+          <label for="nature" >
             <input
               required
-              id="radioDog"
+              id="nature"
               type="radio"
-              name="pet"
+              name="nature"
               value={dog}
               className="radio-input"
               onClick={() => {
                 setDog(true);
                 setCat(false);
-                console.log("dog",dog, "cat", cat);
               }}
             ></input>
             dog
           </label>
-
-       
-          <input type="submit"></input>
+          <Button>
+        
+            <input type="submit" ></input>
+          </Button>
         </form>
-
       </Input>
       <Footer />
     </>

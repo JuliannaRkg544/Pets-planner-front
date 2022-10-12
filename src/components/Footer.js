@@ -15,7 +15,7 @@ export default function Footer() {
         </Link>
         <Link to={"/health-card"}>
           {" "}
-          <span>Health</span>{" "}
+          <span>Info</span>{" "}
         </Link>
       </div>
     </Bottom>

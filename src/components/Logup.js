@@ -4,6 +4,7 @@ import Container, { Rigth } from "../styledComponents/Container";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import Loading from "./Loading"
 
 export default function Logup() {
   const navigate = useNavigate();
@@ -12,6 +13,7 @@ export default function Logup() {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [passwordConfirmation, setpasswordConfirmation] = useState("");
+  const [disabled, setDisabled] = useState(false)
 
   const body = {
     name: name,
@@ -22,6 +24,7 @@ export default function Logup() {
 
   function logup(event) {
     event.preventDefault();
+    setDisabled(true)
 
     axios
       .post(URL_POST, body)
@@ -33,6 +36,7 @@ export default function Logup() {
       .catch((error) => {
         console.log(error.response);
         alert(error.response.data[0].message);
+        setDisabled(false)
       });
   }
 
@@ -67,7 +71,7 @@ export default function Logup() {
           value={passwordConfirmation}
           onChange={(e) => setpasswordConfirmation(e.target.value)}
         ></input>
-        <button onClick={logup}> Cadastrar</button>
+        <button onClick={logup}> {disabled? <Loading/> : "Cadastrar"} </button>
         <Link to={"/"}>
           {" "}
           <span>Já tem uma conta? Faça login</span>
