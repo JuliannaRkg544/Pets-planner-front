@@ -3,9 +3,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import Input from "../styledComponents/Inputs";
 import Button from "../styledComponents/SubmmitButton";
-import Footer from "./Footer";
-import Header from "./Header";
-import Loading from "./Loading";
+import Header from "../components/Header";
+import Loading from "../components/Loading";
 
 export default function SignupPet() {
   const [name, setName] = useState("");
@@ -147,7 +146,6 @@ export default function SignupPet() {
           </Button>
         </form>
       </Input>
-      <Footer />
     </>
   );
 }

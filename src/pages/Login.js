@@ -5,7 +5,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import UserContext from "../Context/UserContext"
-import Loading from "./Loading";
+import Loading from "../components/Loading";
 
 
 

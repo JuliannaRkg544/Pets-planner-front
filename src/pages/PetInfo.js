@@ -2,9 +2,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import styled from "styled-components";
-import Footer from "./Footer";
-import Header from "./Header";
-import ModalDate from "./ModalDate";
+import Header from "../components/Header";
+import ModalDate from "../components/ModalDate";
 import logoDog from "../assets/imgs/dog-logo.png";
 import logoCat from "../assets/imgs/cat-logo.png";
 
@@ -181,7 +180,7 @@ export default function PetInfo() {
               />
           </div>
         </Style>
-        <Footer />
+      
       </>
     ) :  (
     
@@ -282,7 +281,6 @@ export default function PetInfo() {
             </DogInfo>
           </div>
         </Style>
-        <Footer />
       </>
     );
   } else 
@@ -290,7 +288,6 @@ export default function PetInfo() {
       <>
         <Header />
         <Style> Loading</Style>
-        <Footer />
       </>
     );
 }

@@ -4,7 +4,7 @@ import Container, { Rigth } from "../styledComponents/Container";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import Loading from "./Loading"
+import Loading from "../components/Loading"
 
 export default function Logup() {
   const navigate = useNavigate();

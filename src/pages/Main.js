@@ -1,12 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import Footer from "./Footer";
-import Header from "./Header";
+import Header from "../components/Header";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 import { Link } from "react-router-dom";
-import ModalDelete from "./ModalDelete";
+import ModalDelete from "../components/ModalDelete";
 
 export default function Main() {
   const [del, setDel] = useState(false);
@@ -68,7 +67,7 @@ export default function Main() {
           {" "}
           <button>New Baby</button>
         </Link>
-        <Footer />
+       
       </Style>
     );
   } else
@@ -80,7 +79,6 @@ export default function Main() {
           {" "}
           <button>New Baby</button>
         </Link>
-        <Footer/>
       </Style>
     );
 }

@@ -2,13 +2,12 @@ import axios from "axios";
 import { useEffect, useState, useContext } from "react";
 import Button from "../styledComponents/SubmmitButton";
 import ToDoListStyle from "../styledComponents/ToDoListStyle";
-import Footer from "./Footer";
-import Header from "./Header";
+import Header from "../components/Header";
 import UserContext from "../Context/UserContext";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
-import ModalTask from "./ModalTask";
-import ModalDelete from "./ModalDelete";
+import ModalTask from "../components/ModalTask";
+import ModalDelete from "../components/ModalDelete";
 
 export default function ToDoList() {
   const [toggleModal, setToggleModal] = useState(false);
@@ -148,7 +147,6 @@ export default function ToDoList() {
             setToggleModal={setToggleModal}
           />
         </ToDoListStyle>
-        <Footer />
       </>
     );
   } else
@@ -166,7 +164,6 @@ export default function ToDoList() {
             setToggleModal={setToggleModal}
           />
         </ToDoListStyle>
-        <Footer />
       </>
     );
 }

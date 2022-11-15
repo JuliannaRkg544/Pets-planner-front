@@ -8,9 +8,12 @@ export default function Header() {
     <Top>
       <div className="left">
         <img src={logo} />
-        <h1>Pets's Planner</h1>
+        <h1  onClick={()=>navigate("/pets")} >Pets's Planner</h1>
       </div>
+      <div className="rigth" >
+      <span className="list" onClick={()=>navigate("/to-do-list")} >To-do-list</span>
       <span className="rigth" onClick={()=>navigate("/")} >Logout</span>
+      </div>
     </Top>
   );
 }
@@ -38,6 +41,16 @@ const Top = styled.div`
     font-weight: 600;
     cursor: pointer;
     padding: 5px;
+    margin-right: 20px;
+  }
+  .list{
+    background-color: #fff;
+    display: flex;
+    align-self: flex-start;
+  }
+  .list:hover{
+    background-color: var(--darkcolor);
+    transition: 0.5s;
   }
   h1 {
     font-family: "Atma", cursive;
@@ -45,6 +58,7 @@ const Top = styled.div`
     font-weight: 700;
     line-height: 42.09px;
     padding: 10px;
+    cursor: pointer;
   }
   img {
     width: 88px;
