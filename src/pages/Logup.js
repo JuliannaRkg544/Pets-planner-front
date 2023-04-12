@@ -34,8 +34,8 @@ export default function Logup() {
         navigate("/");
       })
       .catch((error) => {
-        console.log(error.response);
-        alert(error.response.data[0].message);
+        console.log(error.response.data);
+        alert("oops, algum erro ocorreu :/");
         setDisabled(false)
       });
   }
